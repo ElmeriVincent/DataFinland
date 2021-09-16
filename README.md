@@ -1,3 +1,8 @@
-## Finland Now!
+## Data Finland
 
-Using data about Finland to create an app to deploy it on Streamlit.
+- Making an App called Data Finland
+  - Follow my example and then you have the ability to create an App about your country and it's data.
+
+<br>
+
+- 
