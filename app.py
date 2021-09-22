@@ -7,6 +7,7 @@ import time
 from PIL import Image
 import altair as aa
 
+
 #set_page_config sets a title on your window.
 st.set_page_config(page_title="Data Finland")
 
@@ -16,13 +17,14 @@ st.markdown("<h1 style='text-align: center;  { font-family: finlandica; } '>Data
 
 
 ### --- LOAD DATAFRAME
-excel_file = "data.xlsx"
+excel_file = "data2.xlsx"
 
 data = pd.read_excel(excel_file,
                 usecols='A:B',
                 parse_dates=True)
 
 data.set_index('Year', inplace=True)
+
 st.line_chart(data)
 
 
