@@ -34,6 +34,10 @@ https://streamlit.io/
 
 `import streamlit`
 
+Remember 
+
+`pip install (yourImports)`
+
 ##### Viewing your app:
 
 `streamlit run [filename]`
