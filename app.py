@@ -44,7 +44,7 @@ st.write('### Result', selected_rows)
 
 
 #raw data option
-if st.sidebar.checkbox("Show raw data"):
+if st.checkbox("Show raw data"):
         st.subheader("Raw data")
         st.write(data)
 
