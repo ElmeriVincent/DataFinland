@@ -15,13 +15,17 @@ import plost
 
 #set_page_config sets a title on your window.
 st.set_page_config(page_title="Data Finland", layout="centered",
+                                page_icon="assets/suomi.png",
                                 initial_sidebar_state="expanded")
 
 
 
 
 #heading
-st.markdown("<h1 style='text-align: center;  { font-family: finlandica; } '>Data Finland!</h1><br>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandica; } '>Data Finland!</h1><br>", unsafe_allow_html=True)
+
+
+st.markdown("[![Twitter Followers](https://badgen.net/twitter/follow/ElmeriVincent)](https://twitter.com/ElmeriVincent)", unsafe_allow_html=True)
 
 
 '''**Population growth in Finland 1960-2020**'''
@@ -37,11 +41,13 @@ data = pd.read_excel(excel_file,
 plost.line_chart(data, "Year", "Population")
 data.set_index('Year', inplace=True)
 
-#user can select specific year and show it's population.
-selected_indices = st.multiselect('Select the Specific year.', data.index)
-selected_rows = data.loc[selected_indices]
-st.write('### Result', selected_rows)
 
+#user can select specific year and show it's population.
+def sy():
+        selected_indices = st.multiselect('Select the Specific year.', data.index)
+        selected_rows = data.loc[selected_indices]
+        st.write('### Result', selected_rows)
+sy()
 
 #raw data option
 if st.checkbox("Show raw data"):
@@ -49,4 +55,8 @@ if st.checkbox("Show raw data"):
         st.write(data)
 
 #Twitter, Change the ElmeriVincent to your own twitter name.
-st.write("![Twitter Follow](https://img.shields.io/twitter/follow/ElmeriVincent?style=social)")
+
+
+
+
+
