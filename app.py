@@ -6,6 +6,7 @@ import time
 from PIL import Image
 import altair as aa
 import plost
+import seaborn as sns
 
 #Simple way to display your data, for this we have used population data of Finland.
 #I did this while learning about Streamlit. The code is nothing special, it's a simple layout.
@@ -21,6 +22,7 @@ st.set_page_config(page_title="Data Finland", layout="centered",
 
 
 
+
 #heading
 st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandica; } '>Data Finland!</h1><br>", unsafe_allow_html=True)
 
@@ -28,33 +30,73 @@ st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandi
 st.markdown("[![Twitter Followers](https://badgen.net/twitter/follow/ElmeriVincent)](https://twitter.com/ElmeriVincent)", unsafe_allow_html=True)
 
 
-'''**Population growth in Finland 1960-2020**'''
+st.sidebar.markdown("<h1 style='text-align: center; color: #0a81c0; { font-family: finlandica; } '>Settings</h1><br>", unsafe_allow_html=True)
 
 
-### --- LOAD DATAFRAME
-excel_file = "data2.xlsx"
 
-data = pd.read_excel(excel_file,
-                usecols='A:B',
-                parse_dates=True)
+def choose():
+        #Select what will be shown
+        total = "Population Growth Finland"
+        female = "Females in Finland"
+        male = "Males in Finland"
+        selection = st.sidebar.radio("Select what will be shown to chart", [total, female, male])
 
-plost.line_chart(data, "Year", "Population")
-data.set_index('Year', inplace=True)
 
+        #Total population
+        if selection == (total):
+                '''**Population growth in Finland 2000-2020**'''
+                ### --- LOAD DATAFRAME
+
+                excel_file = "data1 - Kopio.xlsx"
+
+                data = pd.read_excel(excel_file,
+                                usecols='A:B',
+                                parse_dates=True)
+
+                plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
+                data.set_index('Year', inplace=True)
+
+
+
+        #Females of Total population
+        elif selection == (female):
+                '''**Females in Finland 2000-2020**'''
+                excel_file = "data1 - Kopio.xlsx"
+
+                data = pd.read_excel(excel_file,
+                                usecols='A:D',
+                                parse_dates=True)
+
+                plost.area_chart(data, "Year", "Female", height=250, color='#7f0045')
+                data.set_index('Year', inplace=True)
+
+        #Males of Total population
+        elif selection == (male):
+                '''**Males in Finland 2000-2020**'''
+                excel_file = "data1 - Kopio.xlsx"
+
+                data = pd.read_excel(excel_file,
+                                usecols='A:C',
+                                parse_dates=True)
+
+                plost.area_chart(data, "Year", "Male", height=250, color='#424141')
+                data.set_index('Year', inplace=True)
+        
+        else:
+                '''Choose what will be shown to you from the top left of the screen.'''
+choose()
 
 #user can select specific year and show it's population.
-def sy():
-        selected_indices = st.multiselect('Select the Specific year.', data.index)
-        selected_rows = data.loc[selected_indices]
-        st.write('### Result', selected_rows)
-sy()
+#selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
+#selected_rows = data.loc[selected_indices]
+#st.sidebar.write(selected_rows)
 
-#raw data option
-if st.checkbox("Show raw data"):
-        st.subheader("Raw data")
-        st.write(data)
+#Sidebar show raw data
+        #if st.sidebar.checkbox('Show raw population data'):
+                #st.sidebar.subheader('Population Data')
+                #st.sidebar.table(data)
 
-#Twitter, Change the ElmeriVincent to your own twitter name.
+
 
 
 
