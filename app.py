@@ -47,7 +47,7 @@ def choose():
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
-                excel_file = "data1 - Kopio.xlsx"
+                excel_file = "assets/PoP.xlsx"
 
                 data = pd.read_excel(excel_file,
                                 usecols='A:B',
@@ -56,40 +56,53 @@ def choose():
                 plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
                 data.set_index('Year', inplace=True)
 
+                #user can select specific year and show it's population.
+                selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
+                selected_rows = data.loc[selected_indices]
+                st.sidebar.write(selected_rows)
 
+#_____________________________________________________________________________________________________
 
         #Females of Total population
         elif selection == (female):
+
                 '''**Females in Finland 2000-2020**'''
-                excel_file = "data1 - Kopio.xlsx"
+
+                excel_file = "assets/PoPf.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A:D',
+                                usecols='A:B',
                                 parse_dates=True)
 
                 plost.area_chart(data, "Year", "Female", height=250, color='#7f0045')
+
+
                 data.set_index('Year', inplace=True)
+                selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
+                selected_rows = data.loc[selected_indices]
+                st.sidebar.write(selected_rows)
+
 
         #Males of Total population
         elif selection == (male):
                 '''**Males in Finland 2000-2020**'''
-                excel_file = "data1 - Kopio.xlsx"
+                excel_file = "assets/PoPm.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A:C',
+                                usecols='A:B',
                                 parse_dates=True)
 
                 plost.area_chart(data, "Year", "Male", height=250, color='#424141')
                 data.set_index('Year', inplace=True)
-        
+                selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
+                selected_rows = data.loc[selected_indices]
+                st.sidebar.write(selected_rows)
+
         else:
-                '''Choose what will be shown to you from the top left of the screen.'''
+                '''Error! Please visit the app again soon!'''
 choose()
 
-#user can select specific year and show it's population.
-#selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
-#selected_rows = data.loc[selected_indices]
-#st.sidebar.write(selected_rows)
+
 
 #Sidebar show raw data
         #if st.sidebar.checkbox('Show raw population data'):
