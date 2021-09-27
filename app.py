@@ -34,6 +34,7 @@ st.sidebar.markdown("<h1 style='text-align: center; color: #0a81c0; { font-famil
 
 
 
+
 def choose():
         #Select what will be shown
         total = "Population Growth Finland"
@@ -42,7 +43,7 @@ def choose():
         selection = st.sidebar.radio("Select what will be shown to chart", [total, female, male])
 
 
-        #Total population
+        #TOTAL POPULATION
         if selection == (total):
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
@@ -61,12 +62,18 @@ def choose():
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
+                                                #Sidebar show raw data
+                if st.sidebar.checkbox('Show raw population data'):
+                        st.sidebar.subheader('Population Data')
+                        st.sidebar.table(data)
+                
+
 #_____________________________________________________________________________________________________
 
-        #Females of Total population
+        #FEMALES OF TOTAL POPULATION!
         elif selection == (female):
 
-                '''**Females in Finland 2000-2020**'''
+                '''**Female population growth in Finland 2000-2020**'''
 
                 excel_file = "assets/PoPf.xlsx"
 
@@ -77,15 +84,21 @@ def choose():
                 plost.area_chart(data, "Year", "Female", height=250, color='#7f0045')
 
 
-                data.set_index('Year', inplace=True)
+                data.set_index("Year", inplace=True)
                 selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
+                                #Sidebar show raw data
+                if st.sidebar.checkbox('Show raw population data'):
+                        st.sidebar.subheader('Population Data')
+                        st.sidebar.table(data)
 
-        #Males of Total population
+#_________________________________________________________________________________________________________________
+
+        #MALES OF TOTAL POPULATION!
         elif selection == (male):
-                '''**Males in Finland 2000-2020**'''
+                '''**Male population growth in Finland 2000-2020**'''
                 excel_file = "assets/PoPm.xlsx"
 
                 data = pd.read_excel(excel_file,
@@ -98,16 +111,17 @@ def choose():
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
+
+                #Sidebar show raw data
+                if st.sidebar.checkbox('Show raw population data'):
+                        st.sidebar.subheader('Population Data')
+                        st.sidebar.table(data)
+
+
         else:
                 '''Error! Please visit the app again soon!'''
 choose()
 
-
-
-#Sidebar show raw data
-        #if st.sidebar.checkbox('Show raw population data'):
-                #st.sidebar.subheader('Population Data')
-                #st.sidebar.table(data)
 
 
 
