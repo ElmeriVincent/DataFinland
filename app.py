@@ -30,8 +30,7 @@ st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandi
 st.markdown("[![Twitter Followers](https://badgen.net/twitter/follow/ElmeriVincent)](https://twitter.com/ElmeriVincent)", unsafe_allow_html=True)
 
 
-st.sidebar.markdown("<h1 style='text-align: center; color: #0a81c0; { font-family: finlandica; } '>Settings</h1><br>", unsafe_allow_html=True)
-
+st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>", unsafe_allow_html=True)
 
 
 
@@ -40,7 +39,7 @@ def choose():
         total = "Population Growth Finland"
         female = "Females in Finland"
         male = "Males in Finland"
-        selection = st.sidebar.radio("Select what will be shown to chart", [total, female, male])
+        selection = st.sidebar.radio("Select ", [total, female, male])
 
 
         #TOTAL POPULATION
@@ -48,7 +47,7 @@ def choose():
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
-                excel_file = "assets/PoP.xlsx"
+                excel_file = "assets/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
                                 usecols='A:B',
@@ -62,11 +61,13 @@ def choose():
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
-                                                #Sidebar show raw data
+
+                #Sidebar show raw data
                 if st.sidebar.checkbox('Show raw population data'):
                         st.sidebar.subheader('Population Data')
                         st.sidebar.table(data)
                 
+
 
 #_____________________________________________________________________________________________________
 
@@ -75,12 +76,11 @@ def choose():
 
                 '''**Female population growth in Finland 2000-2020**'''
 
-                excel_file = "assets/PoPf.xlsx"
+                excel_file = "assets/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A:B',
+                                usecols='A,D',
                                 parse_dates=True)
-
                 plost.area_chart(data, "Year", "Female", height=250, color='#7f0045')
 
 
@@ -89,23 +89,24 @@ def choose():
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
-                                #Sidebar show raw data
-                if st.sidebar.checkbox('Show raw population data'):
+                
+                if st.sidebar.checkbox('Show female population data'):
                         st.sidebar.subheader('Population Data')
                         st.sidebar.table(data)
+
 
 #_________________________________________________________________________________________________________________
 
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
                 '''**Male population growth in Finland 2000-2020**'''
-                excel_file = "assets/PoPm.xlsx"
+                excel_file = "assets/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A:B',
+                                usecols='A,C',
                                 parse_dates=True)
-
                 plost.area_chart(data, "Year", "Male", height=250, color='#424141')
+
                 data.set_index('Year', inplace=True)
                 selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
                 selected_rows = data.loc[selected_indices]
@@ -113,10 +114,9 @@ def choose():
 
 
                 #Sidebar show raw data
-                if st.sidebar.checkbox('Show raw population data'):
+                if st.sidebar.checkbox('Show male population data'):
                         st.sidebar.subheader('Population Data')
                         st.sidebar.table(data)
-
 
         else:
                 '''Error! Please visit the app again soon!'''
