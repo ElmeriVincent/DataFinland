@@ -9,6 +9,7 @@ import plost
 import seaborn as sns
 from matplotlib import pyplot as plt
 
+
 #Simple way to display your data, for this we have used population data of Finland.
 #I did this while learning about Streamlit.
 #Be free to use and customize this code, experiment and try new things.
@@ -17,7 +18,7 @@ from matplotlib import pyplot as plt
 
 #set_page_config sets a title on your window.
 st.set_page_config(page_title="Data Finland", layout="centered",
-                                page_icon="assets/suomi.png",
+                                page_icon="images/suomi.png",
                                 initial_sidebar_state="expanded")
 
 
@@ -37,7 +38,8 @@ def choose():
         total = "Population Growth Finland"
         female = "Females in Finland"
         male = "Males in Finland"
-        selection = st.sidebar.radio("Select ", [total, female, male])
+        selection = st.sidebar.radio("Select what chart will be shown.", [total, female, male])
+
 
 
         #TOTAL POPULATION
@@ -45,7 +47,7 @@ def choose():
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
-                excel_file = "assets/datapop.xlsx"
+                excel_file = "data/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
                                 usecols='A:B',
@@ -74,12 +76,13 @@ def choose():
 
                 '''**Female population growth in Finland 2000-2020**'''
 
-                excel_file = "assets/datapop.xlsx"
+                excel_file = "data/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
                                 usecols='A,D',
                                 parse_dates=True)
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
+                
 
                 #OPTION FOR FEMALE POPULATION
                 data.set_index("Year", inplace=True)
@@ -99,7 +102,7 @@ def choose():
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
                 '''**Male population growth in Finland 2000-2020**'''
-                excel_file = "assets/datapop.xlsx"
+                excel_file = "data/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
                                 usecols='A,C',
@@ -124,9 +127,11 @@ choose()
 
 
 
+
 #Audio Anthem
 song = "assets/maamme.mp3"
-st.sidebar.markdown("<h4 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>National Anthem</h4>", unsafe_allow_html=True)
+st.sidebar.markdown("<h4 style='text-align: center; color: #8892B0; { font-family: finlandica; } '><br>National Anthem</h4>", unsafe_allow_html=True)
 st.sidebar.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Maamme (Finnish) || Vårt land (Swedish) || Our land (English)</p>",
 unsafe_allow_html=True)
 st.sidebar.audio(song)
+
