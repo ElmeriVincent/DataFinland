@@ -7,10 +7,11 @@ from PIL import Image
 import altair as aa
 import plost
 import seaborn as sns
+from matplotlib import pyplot as plt
 
 #Simple way to display your data, for this we have used population data of Finland.
-#I did this while learning about Streamlit. The code is nothing special, it's a simple layout.
-#Be free to use and customize this code, expreriment and try new things.
+#I did this while learning about Streamlit.
+#Be free to use and customize this code, experiment and try new things.
 #- Elmeri Keitaanranta, 17. 
 
 
@@ -23,17 +24,14 @@ st.set_page_config(page_title="Data Finland", layout="centered",
 
 
 
-#heading
-st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandica; } '>Data Finland!</h1><br>", unsafe_allow_html=True)
-
-
+#heading | quick markdowns...
+st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandica; } '>Data Finland!</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Created by Elmeri Keitaanranta</p><br>", unsafe_allow_html=True)
 st.markdown("[![Twitter Followers](https://badgen.net/twitter/follow/ElmeriVincent)](https://twitter.com/ElmeriVincent)", unsafe_allow_html=True)
-
-
 st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>", unsafe_allow_html=True)
 
 
-
+#function for viewing population data when clicked certain button on screen.
 def choose():
         #Select what will be shown
         total = "Population Growth Finland"
@@ -54,9 +52,10 @@ def choose():
                                 parse_dates=True)
 
                 plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
+                plost.pie_chart(data, "Year", "Population", height=250)
                 data.set_index('Year', inplace=True)
 
-                #user can select specific year and show it's population.
+                #OPTION FOR TOTAL POPULATION
                 selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
@@ -67,7 +66,6 @@ def choose():
                         st.sidebar.subheader('Population Data')
                         st.sidebar.table(data)
                 
-
 
 #_____________________________________________________________________________________________________
 
@@ -81,16 +79,17 @@ def choose():
                 data = pd.read_excel(excel_file,
                                 usecols='A,D',
                                 parse_dates=True)
-                plost.area_chart(data, "Year", "Female", height=250, color='#7f0045')
+                plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
 
-
+                #OPTION FOR FEMALE POPULATION
                 data.set_index("Year", inplace=True)
                 selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
-                
-                if st.sidebar.checkbox('Show female population data'):
+
+                #SHOWS RAW DATA OF MALE POPULATION
+                if st.sidebar.checkbox('Show raw female population data'):
                         st.sidebar.subheader('Population Data')
                         st.sidebar.table(data)
 
@@ -107,14 +106,15 @@ def choose():
                                 parse_dates=True)
                 plost.area_chart(data, "Year", "Male", height=250, color='#424141')
 
+                #OPTION FOR MALE POPULATION
                 data.set_index('Year', inplace=True)
                 selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
                 selected_rows = data.loc[selected_indices]
                 st.sidebar.write(selected_rows)
 
 
-                #Sidebar show raw data
-                if st.sidebar.checkbox('Show male population data'):
+                #SHOWS RAW DATA OF MALE POPULATION
+                if st.sidebar.checkbox('Show raw male population data'):
                         st.sidebar.subheader('Population Data')
                         st.sidebar.table(data)
 
@@ -124,8 +124,9 @@ choose()
 
 
 
-
-
-
-
-
+#Audio Anthem
+song = "assets/maamme.mp3"
+st.sidebar.markdown("<h4 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>National Anthem</h4>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Maamme (Finnish) || Vårt land (Swedish) || Our land (English)</p>",
+unsafe_allow_html=True)
+st.sidebar.audio(song)
