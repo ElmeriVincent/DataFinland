@@ -75,8 +75,7 @@ Example how to potray your data:
  
  Lets say you have `import plost` in your app.py
  
- in requirements.txt we would want to have `plost==0.1.0`
- Check my requirements.txt for example in need.
+ in requirements.txt we would want to have the current version for example `plost==0.1.0`
  
  <br>
  
