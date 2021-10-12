@@ -8,6 +8,9 @@ import altair as aa
 import plost
 import seaborn as sns
 from matplotlib import pyplot as plt
+from streamlit.commands.page_config import set_page_config
+import streamlit.components.v1 as components
+import csv
 
 
 #Simple way to display your data, for this we have used population data of Finland.
@@ -28,9 +31,9 @@ st.set_page_config(page_title="Data Finland", layout="centered",
 #heading | quick markdowns...
 st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandica; } '>Data Finland!</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Created by Elmeri Keitaanranta</p><br>", unsafe_allow_html=True)
-st.markdown("[![Twitter Followers](https://badgen.net/twitter/follow/ElmeriVincent)](https://twitter.com/ElmeriVincent)", unsafe_allow_html=True)
 st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>", unsafe_allow_html=True)
 
+data = "data/datapop.xlsx"
 
 #function for viewing population data when clicked certain button on screen.
 def choose():
@@ -50,25 +53,18 @@ def choose():
                 excel_file = "data/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A:B',
+                                usecols='A:G',
                                 parse_dates=True)
 
+                #Visualize population growth
                 plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
                 plost.pie_chart(data, "Year", "Population", height=250)
-                data.set_index('Year', inplace=True)
-
-                #OPTION FOR TOTAL POPULATION
-                selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
-                selected_rows = data.loc[selected_indices]
-                st.sidebar.write(selected_rows)
 
 
-                #Sidebar show raw data
-                if st.sidebar.checkbox('Show raw population data'):
-                        st.sidebar.subheader('Population Data')
-                        st.sidebar.table(data)
-                
-
+                #visualize Annual population growth %
+                #st.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Annual Population growth %</p><br>", unsafe_allow_html=True)
+                if st.checkbox("Wanna see the annual population growth %? Click Here."):
+                        plost.bar_chart(data, "Year", "Annual%", height=500, opacity=1.0, width=500, color="#ec5939")
 #_____________________________________________________________________________________________________
 
         #FEMALES OF TOTAL POPULATION!
@@ -79,16 +75,16 @@ def choose():
                 excel_file = "data/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A,D',
+                                usecols='A,D,F',
                                 parse_dates=True)
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
                 
-
+                
                 #OPTION FOR FEMALE POPULATION
-                data.set_index("Year", inplace=True)
-                selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
-                selected_rows = data.loc[selected_indices]
-                st.sidebar.write(selected_rows)
+                #data.set_index("Year", inplace=True)
+                #selected_indices = st.multiselect('Select the Specific year.', data.index)
+                #selected_rows = data.loc[selected_indices]
+                #st.write(selected_rows)
 
 
                 #SHOWS RAW DATA OF MALE POPULATION
@@ -105,16 +101,17 @@ def choose():
                 excel_file = "data/datapop.xlsx"
 
                 data = pd.read_excel(excel_file,
-                                usecols='A,C',
+                                usecols='A,C,E',
                                 parse_dates=True)
                 plost.area_chart(data, "Year", "Male", height=250, color='#424141')
 
+                
                 #OPTION FOR MALE POPULATION
-                data.set_index('Year', inplace=True)
-                selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
-                selected_rows = data.loc[selected_indices]
-                st.sidebar.write(selected_rows)
-
+                #data.set_index('Year', inplace=True)
+                #selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
+                #selected_rows = data.loc[selected_indices]
+                #st.sidebar.write(selected_rows)
+                
 
                 #SHOWS RAW DATA OF MALE POPULATION
                 if st.sidebar.checkbox('Show raw male population data'):
@@ -135,3 +132,12 @@ st.sidebar.markdown("<p style='text-align: center; color: #fff; { font-family: f
 unsafe_allow_html=True)
 st.sidebar.audio(song)
 
+
+#EVERYTHING ABOUT GDP STARTS HERE------------------------------------------------------------------------------------------------
+st.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '><br>GDP</h1>", unsafe_allow_html=True)
+st.write("Finland has the 4th largest knowledge economy in Europe, behind Sweden, Denmark and the UK. ")
+
+data = pd.read_excel(data,
+                        usecols='A,H',
+                        parse_dates=True)
+plost.line_chart(data, "Year", "GDP", color='#dcdf0e')
