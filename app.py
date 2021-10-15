@@ -11,8 +11,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from streamlit.commands.page_config import set_page_config
 import streamlit.components.v1 as components
-import plotly.express as px
-import plotly.figure_factory as ff
+
 
 
 #Simple way to display your data, for this we have used population data of Finland.
