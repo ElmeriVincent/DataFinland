@@ -39,10 +39,6 @@ col1, col2, col3= st.columns((1,1,0.5))
 #function for viewing population data when clicked certain button on screen.
 def choose():
 
-        #Data
-        data = "data\data.xlsx"
-        data = pd.read_excel(data, usecols="A:Y", parse_dates=True)
-
         #Select what will be shown
         total = "Population Growth Finland"
         female = "Females in Finland"
@@ -53,6 +49,10 @@ def choose():
 
         #TOTAL POPULATION
         if selection == (total):
+                #Data
+                data = "data\data.xlsx"
+                data = pd.read_excel(data, usecols="A,B", parse_dates=True)
+
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
@@ -65,6 +65,9 @@ def choose():
         elif selection == (female):
 
                 with col2:
+                        #Data
+                        data = "data\data.xlsx"
+                        data = pd.read_excel(data, usecols="A,D", parse_dates=True)
                         st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
                 "Female population growth"
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
@@ -80,6 +83,9 @@ def choose():
                 excel_file = "data/data.xlsx"
 
                 with col2:
+                        #Data
+                        data = "data\data.xlsx"
+                        data = pd.read_excel(data, usecols="A,C", parse_dates=True)
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
                 "Male population growth"
                 plost.area_chart(data, "Year", "Male", height=250, color='#8f2f03')
