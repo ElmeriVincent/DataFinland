@@ -1,16 +1,18 @@
+from datetime import datetime
 from pandas.io import excel
 import streamlit as st
 import pandas as pd
 import numpy as np
 import time
 from PIL import Image
-import altair as aa
+import altair as alt
 import plost
 import seaborn as sns
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from streamlit.commands.page_config import set_page_config
 import streamlit.components.v1 as components
-import csv
+import plotly.express as px
+import plotly.figure_factory as ff
 
 
 #Simple way to display your data, for this we have used population data of Finland.
@@ -24,19 +26,33 @@ st.set_page_config(page_title="Data Finland", layout="centered",
                                 page_icon="images/suomi.png",
                                 initial_sidebar_state="expanded")
 
+#Top Headings
+st.markdown("<h1 style='text-align: center; color: #C3C3C3; { font-family: finlandica; } '>Data Finland!</h1>",
+        unsafe_allow_html=True)
+
+st.markdown("<p style='text-align: center; color: #C3C3C3; { font-family: finlandica; } '>Created by Elmeri Keitaanranta</p><br>",
+        unsafe_allow_html=True)
+
+st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>",
+        unsafe_allow_html=True)
 
 
+#Data
+data = "data\data.xlsx"
+data = pd.read_excel(data, usecols="A:Y", parse_dates=True)
 
 
-#heading | quick markdowns...
-st.markdown("<h1 style='text-align: center; color: #fff; { font-family: finlandica; } '>Data Finland!</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Created by Elmeri Keitaanranta</p><br>", unsafe_allow_html=True)
-st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>", unsafe_allow_html=True)
+#For positioning
+col1, col2, col3= st.columns((1,1,0.5))
 
-data = "data/datapop.xlsx"
 
 #function for viewing population data when clicked certain button on screen.
 def choose():
+
+        #Data
+        data = "data\data.xlsx"
+        data = pd.read_excel(data, usecols="A:Y", parse_dates=True)
+
         #Select what will be shown
         total = "Population Growth Finland"
         female = "Females in Finland"
@@ -50,60 +66,33 @@ def choose():
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
-                excel_file = "data/datapop.xlsx"
-
-                data = pd.read_excel(excel_file,
-                                usecols='A:G',
-                                parse_dates=True)
-
                 #Visualize population growth
                 plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
                 plost.pie_chart(data, "Year", "Population", height=250)
-
-
-                #visualize Annual population growth %
-                #st.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Annual Population growth %</p><br>", unsafe_allow_html=True)
-                if st.checkbox("Wanna see the annual population growth %? Click Here."):
-                        plost.bar_chart(data, "Year", "Annual%", height=500, opacity=1.0, width=500, color="#ec5939")
 #_____________________________________________________________________________________________________
 
         #FEMALES OF TOTAL POPULATION!
         elif selection == (female):
 
-                '''**Female population growth in Finland 2000-2020**'''
-
-                excel_file = "data/datapop.xlsx"
-
-                data = pd.read_excel(excel_file,
-                                usecols='A,D,F',
-                                parse_dates=True)
+                with col2:
+                        st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
+                "Female population growth"
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
                 
-                
-                #OPTION FOR FEMALE POPULATION
                 #data.set_index("Year", inplace=True)
                 #selected_indices = st.multiselect('Select the Specific year.', data.index)
                 #selected_rows = data.loc[selected_indices]
                 #st.write(selected_rows)
-
-
-                #SHOWS RAW DATA OF MALE POPULATION
-                if st.sidebar.checkbox('Show raw female population data'):
-                        st.sidebar.subheader('Population Data')
-                        st.sidebar.table(data)
-
-
 #_________________________________________________________________________________________________________________
 
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
-                '''**Male population growth in Finland 2000-2020**'''
-                excel_file = "data/datapop.xlsx"
+                excel_file = "data/data.xlsx"
 
-                data = pd.read_excel(excel_file,
-                                usecols='A,C,E',
-                                parse_dates=True)
-                plost.area_chart(data, "Year", "Male", height=250, color='#424141')
+                with col2:
+                        st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
+                "Male population growth"
+                plost.area_chart(data, "Year", "Male", height=250, color='#8f2f03')
 
                 
                 #OPTION FOR MALE POPULATION
@@ -113,31 +102,29 @@ def choose():
                 #st.sidebar.write(selected_rows)
                 
 
-                #SHOWS RAW DATA OF MALE POPULATION
-                if st.sidebar.checkbox('Show raw male population data'):
-                        st.sidebar.subheader('Population Data')
-                        st.sidebar.table(data)
-
         else:
                 '''Error! Please visit the app again soon!'''
 choose()
 
 
+#-----GDP------
+st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finlandica; } '>GDP</h2>", unsafe_allow_html=True)
+"GDP is the total of all value added created in an economy."
 
 
-#Audio Anthem
-song = "assets/maamme.mp3"
-st.sidebar.markdown("<h4 style='text-align: center; color: #8892B0; { font-family: finlandica; } '><br>National Anthem</h4>", unsafe_allow_html=True)
-st.sidebar.markdown("<p style='text-align: center; color: #fff; { font-family: finlandica; } '>Maamme (Finnish) || Vårt land (Swedish) || Our land (English)</p>",
-unsafe_allow_html=True)
-st.sidebar.audio(song)
+#chart = alt.Chart(data).mark_area(color="lightblue",interpolate='step-after', line=True).encode(
+        #x=alt.X('Year', axis=alt.Axis(labelOverlap="greedy",grid=False)),
+        #y=alt.Y('GDP'))
+#st.altair_chart(chart, use_container_width=True)
 
 
-#EVERYTHING ABOUT GDP STARTS HERE------------------------------------------------------------------------------------------------
-st.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '><br>GDP</h1>", unsafe_allow_html=True)
-st.write("Finland has the 4th largest knowledge economy in Europe, behind Sweden, Denmark and the UK. ")
 
-data = pd.read_excel(data,
-                        usecols='A,H',
-                        parse_dates=True)
-plost.line_chart(data, "Year", "GDP", color='#dcdf0e')
+def gdp():
+        data = "data\data.xlsx"
+        data = pd.read_excel(data, usecols="A,H", parse_dates=True)
+
+        data.set_index('Year', inplace=True)
+        selected_indices = st.multiselect('Select the Specific year.', data.index)
+        selected_rows = data.loc[selected_indices]
+        st.write(selected_rows)
+gdp()
