@@ -1,10 +1,7 @@
-from datetime import datetime
 from pandas.io import excel
 import streamlit as st
 import pandas as pd
 import numpy as np
-import time
-from PIL import Image
 import altair as alt
 import plost
 import seaborn as sns
