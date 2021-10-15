@@ -32,12 +32,6 @@ st.markdown("<p style='text-align: center; color: #C3C3C3; { font-family: finlan
 st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>",
         unsafe_allow_html=True)
 
-
-#Data
-data = "data\data.xlsx"
-data = pd.read_excel(data, usecols="A:Y", parse_dates=True)
-
-
 #For positioning
 col1, col2, col3= st.columns((1,1,0.5))
 
