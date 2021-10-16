@@ -7,7 +7,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from streamlit.commands.page_config import set_page_config
 import streamlit.components.v1 as components
-import pandas.io
+
 
 
 
@@ -35,6 +35,9 @@ st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-famil
 #For positioning
 col1, col2, col3= st.columns((1,1,0.5))
 
+data = "data\datapop1.xlsx"
+data = pd.read_excel(data, usecols="A:N")
+data.set_index('Year', inplace=True)
 
 #function for viewing population data when clicked certain button on screen.
 def choose():
@@ -45,11 +48,11 @@ def choose():
         male = "Males in Finland"
         selection = st.sidebar.radio("Select what chart will be shown.", [total, female, male])
 
+        data = "data\datapop1.xlsx"
+        data = pd.read_excel(data, usecols="A:N")
 
         #TOTAL POPULATION
         if selection == (total):
-                data = "data\data.xlsx"
-                data = pd.read_excel(data, usecols="A:N")
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
@@ -63,8 +66,6 @@ def choose():
         elif selection == (female):
 
                 with col2:
-                        data = "data\data.xlsx"
-                        data = pd.read_excel(data, usecols="A:N")
                         st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
                 "Female population growth"
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
@@ -75,8 +76,6 @@ def choose():
         elif selection == (male):
 
                 with col2:
-                        data = "data\data.xlsx"
-                        data = pd.read_excel(data, usecols="A:N")
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
                 "Male population growth"
                 plost.area_chart(data, "Year", "Male", height=250, color='#8f2f03')
@@ -99,7 +98,7 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 
 def gdp():
-        data = "data\data.xlsx"
+        data = "data\datapop1.xlsx"
         data = pd.read_excel(data, usecols="A,H", parse_dates=True)
 
         data.set_index('Year', inplace=True)
