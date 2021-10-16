@@ -74,7 +74,6 @@ def choose():
 
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
-                excel_file = "data/data.xlsx"
 
                 with col2:
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
