@@ -7,6 +7,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from streamlit.commands.page_config import set_page_config
 import streamlit.components.v1 as components
+import pandas.io
 
 
 
