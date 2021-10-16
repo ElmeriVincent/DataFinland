@@ -45,50 +45,42 @@ def choose():
         male = "Males in Finland"
         selection = st.sidebar.radio("Select what chart will be shown.", [total, female, male])
 
-        data = "data\datapop.xlsx"
-        data = pd.read_excel(data, usecols="A:N", parse_dates=True)
-
 
         #TOTAL POPULATION
         if selection == (total):
+                data = "data\data.xlsx"
+                data = pd.read_excel(data, usecols="A:N")
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
                 #Visualize population growth
                 plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
                 plost.pie_chart(data, "Year", "Population", height=250)
+                data.set_index('Year', inplace=True)
 #_____________________________________________________________________________________________________
 
         #FEMALES OF TOTAL POPULATION!
         elif selection == (female):
 
                 with col2:
+                        data = "data\data.xlsx"
+                        data = pd.read_excel(data, usecols="A:N")
                         st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
                 "Female population growth"
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
-                
-                #data.set_index("Year", inplace=True)
-                #selected_indices = st.multiselect('Select the Specific year.', data.index)
-                #selected_rows = data.loc[selected_indices]
-                #st.write(selected_rows)
+                data.set_index('Year', inplace=True)
 #_________________________________________________________________________________________________________________
 
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
 
                 with col2:
+                        data = "data\data.xlsx"
+                        data = pd.read_excel(data, usecols="A:N")
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
                 "Male population growth"
                 plost.area_chart(data, "Year", "Male", height=250, color='#8f2f03')
-
-                
-                #OPTION FOR MALE POPULATION
-                #data.set_index('Year', inplace=True)
-                #selected_indices = st.sidebar.multiselect('Select the Specific year.', data.index)
-                #selected_rows = data.loc[selected_indices]
-                #st.sidebar.write(selected_rows)
-                
-
+                data.set_index('Year', inplace=True)
         else:
                 '''Error! Please visit the app again soon!'''
 choose()
@@ -107,7 +99,7 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 
 def gdp():
-        data = "data\datapop.xlsx"
+        data = "data\data.xlsx"
         data = pd.read_excel(data, usecols="A,H", parse_dates=True)
 
         data.set_index('Year', inplace=True)
