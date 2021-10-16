@@ -44,14 +44,12 @@ def choose():
         male = "Males in Finland"
         selection = st.sidebar.radio("Select what chart will be shown.", [total, female, male])
 
+        data = "data\datapop.xlsx"
+        data = pd.read_excel(data, usecols="A:N", parse_dates=True)
 
 
         #TOTAL POPULATION
         if selection == (total):
-                #Data
-                data = "data\data.xlsx"
-                data = pd.read_excel(data, usecols="A,B", parse_dates=True)
-
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
@@ -64,9 +62,6 @@ def choose():
         elif selection == (female):
 
                 with col2:
-                        #Data
-                        data = "data\data.xlsx"
-                        data = pd.read_excel(data, usecols="A,D", parse_dates=True)
                         st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
                 "Female population growth"
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
@@ -82,9 +77,6 @@ def choose():
                 excel_file = "data/data.xlsx"
 
                 with col2:
-                        #Data
-                        data = "data\data.xlsx"
-                        data = pd.read_excel(data, usecols="A,C", parse_dates=True)
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
                 "Male population growth"
                 plost.area_chart(data, "Year", "Male", height=250, color='#8f2f03')
@@ -115,7 +107,7 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 
 def gdp():
-        data = "data\data.xlsx"
+        data = "data\datapop.xlsx"
         data = pd.read_excel(data, usecols="A,H", parse_dates=True)
 
         data.set_index('Year', inplace=True)
