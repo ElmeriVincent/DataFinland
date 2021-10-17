@@ -32,13 +32,6 @@ st.markdown("<p style='text-align: center; color: #C3C3C3; { font-family: finlan
 st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>",
         unsafe_allow_html=True)
 
-#For positioning
-col1, col2, col3= st.columns((1,1,0.5))
-
-data = "data\datapop1.xlsx"
-data = pd.read_excel(data, usecols="A:N")
-data.set_index('Year', inplace=True)
-
 #function for viewing population data when clicked certain button on screen.
 def choose():
 
@@ -47,6 +40,9 @@ def choose():
         female = "Females in Finland"
         male = "Males in Finland"
         selection = st.sidebar.radio("Select what chart will be shown.", [total, female, male])
+
+        #For positioning
+        col1, col2, col3= st.columns((1,1,0.5))
 
         data = "data\datapop1.xlsx"
         data = pd.read_excel(data, usecols="A:N")
@@ -98,11 +94,16 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 
 def gdp():
+        
         data = "data\datapop1.xlsx"
-        data = pd.read_excel(data, usecols="A,H", parse_dates=True)
-
+        data = pd.read_excel(data, usecols="A,H")
         data.set_index('Year', inplace=True)
-        selected_indices = st.multiselect('Select the Specific year.', data.index)
+
+        #For positioning
+        col1, col2, col3= st.columns((1,1,0.5))
+
+        selected_indices = st.multiselect('Select the specific year to see it\'s GDP', data.index)
         selected_rows = data.loc[selected_indices]
-        st.write(selected_rows)
+        with col2:
+                st.write(selected_rows)
 gdp()
