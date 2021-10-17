@@ -9,7 +9,9 @@
 - Deploying it on Streamlit
 - Adding it to your portofolio:)
 
-<h3 align="center">Checkout The App!</h3>
+<h3 align="center">Checkout The App!
+(CURRENTLY DOWN!)
+ </h3>
 <p align="center">This is my first Open-Source project on development</p>
 
 <h3 align="center">
