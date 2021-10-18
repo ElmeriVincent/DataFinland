@@ -85,9 +85,6 @@ def choose():
                 '''Error! Please visit the app again soon!'''
 choose()
 
-
-
-
 #-----GDP------
 st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finlandica; } '>GDP</h2>", unsafe_allow_html=True)
 "GDP is the total of all value added created in an economy."
@@ -117,7 +114,7 @@ def gdp():
         #GDP% chart
         data = "data/data.xlsx"
         data = pd.read_excel(data, usecols="A,I")
-        plost.area_chart(data, "Year", "GDP%", height=250, color='#0b590a')
+        plost.area_chart(data, "Year", "GDP%", height=250, color='#c8c100')
 
         st.caption('"Finland fell into recession in the last quarter of 2008, and it\'s economy did not begin growing again until the third quarter of 2009." - IndiaTimes.com')
 
