@@ -7,6 +7,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from streamlit.commands.page_config import set_page_config
 import streamlit.components.v1 as components
+import xlrd
 
 
 
@@ -32,6 +33,8 @@ st.markdown("<p style='text-align: center; color: #C3C3C3; { font-family: finlan
 st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>",
         unsafe_allow_html=True)
 
+data = "data\datapop1.xlsx"
+
 #function for viewing population data when clicked certain button on screen.
 def choose():
 
@@ -44,42 +47,43 @@ def choose():
         #For positioning
         col1, col2, col3= st.columns((1,1,0.5))
 
-        data = "data\datapop1.xlsx"
-        data = pd.read_excel(data, usecols="A:N")
 
         #TOTAL POPULATION
         if selection == (total):
+                data = "data/data.xlsx"
+                data = pd.read_excel(data, usecols="A,B")
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
                 #Visualize population growth
                 plost.area_chart(data, "Year", "Population", height=250, color='#0a81c0')
                 plost.pie_chart(data, "Year", "Population", height=250)
-                data.set_index('Year', inplace=True)
 #_____________________________________________________________________________________________________
 
         #FEMALES OF TOTAL POPULATION!
         elif selection == (female):
+                data = "data/data.xlsx"
+                data = pd.read_excel(data, usecols="A,D")
 
                 with col2:
                         st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
                 "Female population growth"
                 plost.area_chart(data, "Year", "Female", height=250, color='#673ba6')
-                data.set_index('Year', inplace=True)
+                
 #_________________________________________________________________________________________________________________
 
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
-
+                data = "data/data.xlsx"
+                data = pd.read_excel(data, usecols="A,C")
                 with col2:
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
                 "Male population growth"
                 plost.area_chart(data, "Year", "Male", height=250, color='#8f2f03')
-                data.set_index('Year', inplace=True)
+                
         else:
                 '''Error! Please visit the app again soon!'''
 choose()
-
 
 #-----GDP------
 st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finlandica; } '>GDP</h2>", unsafe_allow_html=True)
@@ -94,8 +98,7 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 
 def gdp():
-        
-        data = "data\datapop1.xlsx"
+        data = "data/data.xlsx"
         data = pd.read_excel(data, usecols="A,H")
         data.set_index('Year', inplace=True)
 
