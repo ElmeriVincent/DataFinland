@@ -12,3 +12,4 @@ requests==2.26.0
 setuptools==58.2.0
 pandas-io==0.0.1
 openpyxl==3.0.9
+mysql-connector-python==8.0.27
