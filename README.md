@@ -3,11 +3,11 @@
 <h3>Using Streamlit to create and deploy an app</h3>
 
 - Collecting data
-- formatting it to xlsx (Excel) type.
+- Choosing database
+- Configuring connections
 - Visualizing data
 - Making our app interactive
 - Deploying it on Streamlit
-- Adding it to your portofolio:)
 
 <h3 align="center">Checkout The App!
  </h3>
@@ -47,12 +47,12 @@ Remember
 
 ### Starting with Data
 
-- Decide what country you want to use.
-- Here we are using **excel** but feel free to use csv or json.
 - Where I got my data: https://data.worldbank.org/country/FI
+- Decide where you want to handle your data(mysql, mongoDB, Excel, etc...)
 
+<br>
 
-### Using Excel
+#### Using Excel
 
 Example how to potray your data:
 
@@ -63,14 +63,35 @@ Example how to potray your data:
   - Number Format
   - Own
   - Then select the year format
- 
+
  <br>
  
- ### Starting coding
- - Create app.py file
- - Create requirements.txt
- - README.md
  
+ #### Using MySQL
+ 
+ First time with MySQL? To get started https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing
+ 
+ *In MySQL WorkBench:*
+ 
+ ![example](https://user-images.githubusercontent.com/77973084/140620794-6f23ef5e-eeac-46ab-8149-429517bbb28a.png)
+ 
+ When you got your data ready and mysql server running, go to docs and follow the guide on how to use mysql in streamlit
+ https://docs.streamlit.io/knowledge-base/tutorials/databases/mysql#add-username-and-password-to-your-local-app-secrets
+ 
+ - creating .streamlit/secrets.toml
+ - Add secrets to cloud
+ - add `mysql-connector-python==x.x.x` to requirements.txt
+
+ <br>
+ 
+ #### Download data as:
+ 
+ **CSV:**
+ [datafinland.csv](https://github.com/ElmeriVincent/FinlandNow/files/7491101/datafinland.csv)
+ 
+ 
+ <br>
+
  #### What is requirements.txt?
  is used for specifying what python packages are required to run the project you are looking at.
  
