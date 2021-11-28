@@ -33,10 +33,12 @@ st.markdown("<p style='text-align: center; color: #C3C3C3; { font-family: finlan
 st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>",
         unsafe_allow_html=True)
 
-data = "data\datapop1.xlsx"
 
 #function for viewing population data when clicked certain button on screen.
 def choose():
+
+        data = "data\datafinland.csv"
+        data = pd.read_csv(data)
 
         #Select what will be shown
         total = "Population Growth Finland"
@@ -50,8 +52,6 @@ def choose():
 
         #TOTAL POPULATION
         if selection == (total):
-                data = "data/data.xlsx"
-                data = pd.read_excel(data, usecols="A,B")
                 '''**Population growth in Finland 2000-2020**'''
                 ### --- LOAD DATAFRAME
 
@@ -62,8 +62,6 @@ def choose():
 
         #FEMALES OF TOTAL POPULATION!
         elif selection == (female):
-                data = "data/data.xlsx"
-                data = pd.read_excel(data, usecols="A,D")
 
                 with col2:
                         st.metric("Females of Total Population", "50.69%", "-0.01%, since 2019",)
@@ -74,8 +72,7 @@ def choose():
 
         #MALES OF TOTAL POPULATION!
         elif selection == (male):
-                data = "data/data.xlsx"
-                data = pd.read_excel(data, usecols="A,C")
+
                 with col2:
                         st.metric("Males of Total Population", "49.32%", "0.02%, since 2019",)
                 "Male population growth"
@@ -97,32 +94,19 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 
 def gdp():
-        data = "data/data.xlsx"
-        data = pd.read_excel(data, usecols="A,H")
-        data.set_index('Year', inplace=True)
-
-
+        
+        data = "data/datafinland.csv"
+        data = pd.read_csv(data)
+        
         #For positioning
         col1, col2, col3= st.columns((1,1,0.5))
 
-        #Creates multiselect for GDP
-        selected_indices = st.multiselect('Select the specific year to see it\'s GDP', data.index)
-        selected_rows = data.loc[selected_indices]
-        with col2:
-                st.write(selected_rows)
-        
-        #GDP% chart
-        data = "data/data.xlsx"
-        data = pd.read_excel(data, usecols="A,I")
-        plost.area_chart(data, "Year", "GDP%", height=250, color='#c8c100')
+        plost.area_chart(data, "Year", "GDP", height=250, color='#3d6b2c')
 
         st.caption('"Finland fell into recession in the last quarter of 2008, and it\'s economy did not begin growing again until the third quarter of 2009." - IndiaTimes.com')
 
 
         #GDP SETTINGS STARTS HERE
-        data = "data/data.xlsx"
-        data = pd.read_excel(data, usecols="A:K")
-
         #GDP SETTINGS HEADER
         st.sidebar.markdown("<h2 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>GDP</h2>",
         unsafe_allow_html=True)
@@ -130,24 +114,7 @@ def gdp():
         #Global rank
         st.sidebar.write("Finland is ranked 42nd by it's GDP.")
 
-        ""
-        ""
-
         col6, col7 = st.columns((2,1))
-
-        with col6:
-                #Per Capita checkbox
-                perCapita = st.sidebar.checkbox("GDP per Capita")
-                if perCapita:
-                        "per capita"
-                        plost.bar_chart(data, "Year", "GDP-per-c", height=250, color='#0b590a')
-        
-        with col7:
-                #Per Capita checkbox
-                inflation = st.sidebar.checkbox("GDP Inflation")
-                if inflation:
-                        "inflation"
-                        plost.bar_chart(data, "Year", "infaltion-GDP", height=250, color='#0b590a')
 
 gdp()
 
