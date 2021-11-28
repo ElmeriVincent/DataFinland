@@ -95,7 +95,7 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 def gdp():
         
-        data = "data/datafinland.csv"
+        data = "data\datafinland.csv"
         data = pd.read_csv(data)
         
         #For positioning
