@@ -37,8 +37,8 @@ st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-famil
 #function for viewing population data when clicked certain button on screen.
 def choose():
 
-        data = "data\data.csv"
-        data = pd.read_csv(data)
+        data1 = "data\data.csv"
+        data = pd.read_csv(data1)
 
         #Select what will be shown
         total = "Population Growth Finland"
@@ -95,8 +95,8 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 
 def gdp():
         
-        data = "data\data.csv"
-        data = pd.read_csv(data)
+        data2 = "data\data.csv"
+        data = pd.read_csv(data2)
         
         #For positioning
         col1, col2, col3= st.columns((1,1,0.5))
