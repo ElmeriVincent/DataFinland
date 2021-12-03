@@ -30,7 +30,7 @@ st.markdown("<h1 style='text-align: center; color: #C3C3C3; { font-family: finla
 st.markdown("<p style='text-align: center; color: #C3C3C3; { font-family: finlandica; } '>Created by Elmeri Keitaanranta</p><br>",
         unsafe_allow_html=True)
 
-st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>Settings</h1><br>",
+st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-family: finlandica; } '><br><br><br><br><br><br>Settings</h1><br>",
         unsafe_allow_html=True)
 
 
@@ -104,17 +104,6 @@ def gdp():
         plost.area_chart(data, "Year", "GDP", height=250, color='#3d6b2c')
 
         st.caption('"Finland fell into recession in the last quarter of 2008, and it\'s economy did not begin growing again until the third quarter of 2009." - IndiaTimes.com')
-
-
-        #GDP SETTINGS STARTS HERE
-        #GDP SETTINGS HEADER
-        st.sidebar.markdown("<h2 style='text-align: center; color: #8892B0; { font-family: finlandica; } '>GDP</h2>",
-        unsafe_allow_html=True)
-
-        #Global rank
-        st.sidebar.write("Finland is ranked 42nd by it's GDP.")
-
-        col6, col7 = st.columns((2,1))
 
 gdp()
 
