@@ -81,14 +81,6 @@ Example how to potray your data:
  - creating .streamlit/secrets.toml
  - Add secrets to cloud
  - add `mysql-connector-python==x.x.x` to requirements.txt
-
- <br>
- 
- #### Download data as:
- 
- **CSV:**
- [datafinland.csv](https://github.com/ElmeriVincent/FinlandNow/files/7491101/datafinland.csv)
- 
  
  <br>
 
