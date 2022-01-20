@@ -15,7 +15,7 @@
 
 <h3 align="center">
   
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_red.svg)](https://share.streamlit.io/elmerivincent/finlandnow/main/app.py)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_red.svg)](https://share.streamlit.io/elmerivincent/datafinland/main/app.py)
 
 </h3>
 
