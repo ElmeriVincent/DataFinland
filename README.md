@@ -106,7 +106,6 @@ Example how to potray your data:
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-[![Twitter Followers](https://badgen.net/twitter/follow/ElmeriVincent)](https://twitter.com/ElmeriVincent)
 [![PyPi license](https://badgen.net/pypi/license/pip/)](https://pypi.com/project/pip/)
 
   
