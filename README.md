@@ -93,6 +93,12 @@ Example how to potray your data:
  
  <br>
  
+<h4 align="left">
+ Streamlit Version: 1.0.0
+
+ 
+ <br>
+ 
 
 <h3 align="center">
 
@@ -102,6 +108,8 @@ Example how to potray your data:
 
   
 </h3>
+
+
     
 
     
