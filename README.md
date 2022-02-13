@@ -11,7 +11,6 @@
 
 <h3 align="center">Checkout The App!
  </h3>
-<p align="center">This is my first Open-Source project on development</p>
 
 <h3 align="center">
   
@@ -96,7 +95,6 @@ Example how to potray your data:
 <h4 align="left">
  Streamlit Version: 1.0.0
 
- 
  <br>
  
 
@@ -106,8 +104,9 @@ Example how to potray your data:
 
 [![PyPi license](https://badgen.net/pypi/license/pip/)](https://pypi.com/project/pip/)
 
-  
 </h3>
+ 
+
 
 
     
