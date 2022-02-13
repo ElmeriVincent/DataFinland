@@ -1,22 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import altair as alt
 import plost
-import seaborn as sns
-import matplotlib.pyplot as plt
 from streamlit.commands.page_config import set_page_config
 import streamlit.components.v1 as components
-import xlrd
-
-
-
 
 #Simple way to display your data, for this we have used population data of Finland.
 #I did this while learning about Streamlit.
 #Be free to use and customize this code, experiment and try new things.
 #- Elmeri Keitaanranta, 17. 
-
 
 #set_page_config sets a title on your window.
 st.set_page_config(page_title="Data Finland", layout="centered",
@@ -34,7 +26,6 @@ st.sidebar.markdown("<h1 style='text-align: center; color: #8892B0; { font-famil
         unsafe_allow_html=True)
 
 
-#function for viewing population data when clicked certain button on screen.
 def choose():
 
         data1 = "data.csv"
@@ -87,14 +78,7 @@ st.markdown("<h2 style='text-align: left; color: #C3C3C3; { font-family: finland
 "GDP is the total of all value added created in an economy."
 
 
-#chart = alt.Chart(data).mark_area(color="lightblue",interpolate='step-after', line=True).encode(
-        #x=alt.X('Year', axis=alt.Axis(labelOverlap="greedy",grid=False)),
-        #y=alt.Y('GDP'))
-#st.altair_chart(chart, use_container_width=True)
-
-
 def gdp():
-        
         data2 = "data.csv"
         data = pd.read_csv(data2)
         
@@ -104,7 +88,6 @@ def gdp():
         plost.area_chart(data, "Year", "GDP", height=250, color='#3d6b2c')
 
         st.caption('"Finland fell into recession in the last quarter of 2008, and it\'s economy did not begin growing again until the third quarter of 2009." - IndiaTimes.com')
-
 gdp()
 
 
